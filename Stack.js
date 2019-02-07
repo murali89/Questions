@@ -39,6 +39,7 @@ function testLIFO() {
   stack.push(2);
   assert.equal(stack.pop(), 2);
   assert.equal(stack.pop(), 1);
+  console.log('Stack: testLIFO() successful');
 }
 
 main();

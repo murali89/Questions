@@ -2,31 +2,31 @@ var assert = require('assert');
 var Stack = require('./Stack').Stack;
 
 function QueueUsingStack() {
-  this.dataStack = new Stack();
-  this.auxStack = new Stack();
+  this._dataStack = new Stack();
+  this._auxStack = new Stack();
 
   this.enqueue = function (num) {
-    this.dataStack.push(num);
+    this._dataStack.push(num);
   }
 
   this.dequeue = function () {
-    if (this.auxStack.count() === 0) {
+    if (this._auxStack.count() === 0) {
       // copy from data stack to aux stack
-      while (this.dataStack.count() > 0) {
-        var n = this.dataStack.pop();
-        this.auxStack.push(n);
+      while (this._dataStack.count() > 0) {
+        var n = this._dataStack.pop();
+        this._auxStack.push(n);
       }
     }
 
-    if (this.auxStack.count() === 0) {
+    if (this._auxStack.count() === 0) {
       throw 'QueueUsingStack: No elements'
     }
 
-    return this.auxStack.pop();
+    return this._auxStack.pop();
   }
 
   this.count = function () {
-    return this.auxStack.count() + this.dataStack.count();
+    return this._auxStack.count() + this._dataStack.count();
   }
 }
 
@@ -40,6 +40,7 @@ function testFIFO() {
   q.enqueue(2);
   assert.equal(q.dequeue(), 1);
   assert.equal(q.dequeue(), 2);
+  console.log('QueueUsingStack: testFIFO() successful');
 }
 
 main();
